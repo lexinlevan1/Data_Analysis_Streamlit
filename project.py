@@ -4,11 +4,13 @@ import streamlit as st
 import matplotlib as plt
 import seaborn as sns
 
+# ------ Configuring Page -------
+
 st.set_page_config(page_title= 'Average Time Spent By A User On Social Media',
                    page_icon= ':bar_chart:',
                    layout = 'centered')
 
-df = pd.read_csv('dummy_data.csv', )
+df = pd.read_csv('dummy_data.csv')
 
 print(df.head(5))
 
