@@ -18,4 +18,72 @@ st.title('Data Project 1:')
 st.header('Average Time Spent By A User On Social Media')
 st.write('by: Lexin Deang')
 st.caption('Kaggle Dataset Link : https://www.kaggle.com/datasets/imyjoshua/average-time-spent-by-a-user-on-social-media')
-st.dataframe(df)
+
+# Replace 'Lifestlye' with Lifestyle due to misspelling
+df.replace({'Lifestlye':'Lifestyle'}, inplace = True)
+
+# ------ Sidebar Creation -------
+
+profession = st.sidebar.multiselect(
+    'Select the profession:',
+    options = df['profession'].unique(),
+    default = df['profession'].unique()
+)
+
+location = st.sidebar.multiselect(
+    'Select the location:',
+    options = df['location'].unique(),
+    default = df['location'].unique()
+)
+
+gender = st.sidebar.multiselect(
+    'Select the gender:',
+    options = df['gender'].unique(),
+    default = df['gender'].unique()
+)
+
+interests = st.sidebar.multiselect(
+    'Select the interests:',
+    options = df['interests'].unique(),
+    default = df['interests'].unique()
+)
+
+demographics = st.sidebar.multiselect(
+    'Select the demographics:',
+    options = df['demographics'].unique(),
+    default = df['demographics'].unique()
+)
+# *** Selection ***
+query_multiline = '''
+    profession == @profession &
+    location == @location &
+    gender == @gender &
+    interests == @interests &
+    demographics == @demographics
+'''
+
+query_multiline = query_multiline.replace('\n', '')
+
+# Customized Dataframe Based on selections
+df_selection = df.query(query_multiline)
+
+st.dataframe(df_selection)
+
+# ------ Main Page -------
+st.title(':bar_chart: Time Spent Correlations')
+st.markdown('###')
+
+average_income = df_selection['income'].mean()
+average_time_spent = df_selection['time_spent'].mean()
+total_home_owners = len(df[df['isHomeOwner'] == False])
+
+left_col, middle_col, right_col = st.columns(3)
+with left_col: 
+    st.subheader(':dollar: Income Average:')
+    st.subheader(f'$ {average_income}')
+with middle_col: 
+    st.subheader(':clock2: Average Time')
+    st.subheader(f'{average_time_spent} hrs')
+with right_col: 
+    st.subheader(':house: Homeowners')
+    st.subheader(total_home_owners)
