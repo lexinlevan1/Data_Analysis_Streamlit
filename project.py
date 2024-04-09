@@ -27,7 +27,7 @@ tab1, tab2 = st.tabs(['EDA', 'Visualization'])
 with tab1:
     st.header('Exploratory Data Analysis')
     
-        # ------ Sidebar Creation -------
+    # ------ Sidebar Creation -------
 
     profession = st.sidebar.multiselect(
         'Select the profession:',
@@ -81,7 +81,7 @@ with tab2:
     st.markdown('###')
 
     average_income = round(df_selection['income'].mean(),1)
-    average_time_spent = df_selection['time_spent'].mean()
+    average_time_spent = round(df_selection['time_spent'].mean(), 1)
     total_home_owners = len(df[df['isHomeOwner'] == False])
 
     left_col, middle_col, right_col = st.columns(3)
@@ -90,7 +90,7 @@ with tab2:
         st.subheader(f'$ {average_income}')
     with middle_col: 
         st.subheader(':clock2: Average Time')
-        st.subheader(f'{average_time_spent} hrs')
+        st.subheader(f'{average_time_spent} hours')
     with right_col: 
         st.subheader(':house: Homeowners')
         st.subheader(total_home_owners)
