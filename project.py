@@ -24,6 +24,8 @@ df.replace({'Lifestlye':'Lifestyle'}, inplace = True)
 
 
 tab1, tab2 = st.tabs(['EDA', 'Visualization'])
+
+# -------- Exploratory Data Analysis --------
 with tab1:
     st.header('Exploratory Data Analysis')
     
@@ -74,15 +76,30 @@ with tab1:
 
     st.dataframe(df_selection)
 
+# -------- Visualization --------
 with tab2: 
 
     # ------ Main Page -------
     st.title(':bar_chart: Time Spent Correlations')
     st.markdown('###')
-
+    
+    profession_str = ', '.join(profession)
+    location_str = ', '.join(location)
+    gender_str = ', '.join(gender)
+    interests_str = ', '.join(interests)
+    demographics_str = ', '.join(demographics)
+    
+    st.markdown(f"""
+                 The data refers to the professions of `{profession_str}`\
+                     at `{location_str}` who are `{gender_str}`,\
+                         who have interests in `{interests_str}`, \
+                             under the demographics of\
+                                 `{demographics_str}`. """)
+            
     average_income = round(df_selection['income'].mean(),1)
     average_time_spent = round(df_selection['time_spent'].mean(), 1)
     total_home_owners = len(df[df['isHomeOwner'] == False])
+
 
     left_col, middle_col, right_col = st.columns(3)
     with left_col: 
