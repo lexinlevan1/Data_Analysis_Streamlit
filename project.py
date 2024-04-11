@@ -146,7 +146,7 @@ with tab2:
     st.subheader(f'Gender vs. {quantitative}')
     gender_cond = df_selection['gender'].isin(gender)
     gender_df = df_selection[gender_cond]
-    gender_df = round(gender_df.groupby('location')[quantitative.lower()].mean(), 2)
+    gender_df = round(gender_df.groupby('gender')[quantitative.lower()].mean(), 2)
     
     st.bar_chart(data = gender_df)
     
@@ -164,6 +164,6 @@ with tab2:
     st.subheader(f'Demographics vs. {quantitative}')
     demographics_cond = df_selection['demographics'].isin(demographics)
     demographics_df = df_selection[demographics_cond]
-    demographics_df = round(demographics_df.groupby('location')[quantitative.lower()].mean(), 2)
+    demographics_df = round(demographics_df.groupby('demographics')[quantitative.lower()].mean(), 2)
     
     st.bar_chart(data = demographics_df)
