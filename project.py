@@ -76,6 +76,8 @@ with tab1:
 
     st.dataframe(df_selection)
 
+
+
 # -------- Visualization --------
 with tab2: 
 
@@ -98,7 +100,7 @@ with tab2:
             
     average_income = round(df_selection['income'].mean(),1)
     average_time_spent = round(df_selection['time_spent'].mean(), 1)
-    total_home_owners = len(df[df['isHomeOwner'] == False])
+    total_home_owners = len(df_selection[df_selection['isHomeOwner'] == True])
 
 
     left_col, middle_col, right_col = st.columns(3)
@@ -110,4 +112,15 @@ with tab2:
         st.subheader(f'{average_time_spent} hours')
     with right_col: 
         st.subheader(':house: Homeowners')
-        st.subheader(total_home_owners)
+        st.subheader(f'{total_home_owners} of {len(df_selection)}')
+    
+    st.write('\n')
+    st.subheader('Profession vs. Annual Income')
+    # Profession vs. Annual Income
+    profession_cond = df_selection['profession'].isin(profession)
+    profession_df = df_selection[profession_cond]
+    profession_df = round(profession_df.groupby('profession')['income'].mean(), 2)
+    
+    st.bar_chart(data = profession_df)
+    
+    
