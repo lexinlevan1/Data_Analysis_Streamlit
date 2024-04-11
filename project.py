@@ -114,13 +114,56 @@ with tab2:
         st.subheader(':house: Homeowners')
         st.subheader(f'{total_home_owners} of {len(df_selection)}')
     
+    # -------- Category (5) vs Quantitative Variables --------
+    quantitative = st.sidebar.selectbox(
+        'What Quantitative Variable do you want to compare each category with?',
+        ('Age', 'Time_spent', 'Income'),
+        index = None,
+        placeholder = 'Select Numerical Variable...'
+    )
+    
     st.write('\n')
-    st.subheader('Profession vs. Annual Income')
-    # Profession vs. Annual Income
+    st.subheader(f'Profession vs. {quantitative}')
+
+    # Profession vs. User Input
     profession_cond = df_selection['profession'].isin(profession)
     profession_df = df_selection[profession_cond]
-    profession_df = round(profession_df.groupby('profession')['income'].mean(), 2)
-    
+    profession_df = round(profession_df.groupby('profession')[quantitative.lower()].mean(), 2)
+
     st.bar_chart(data = profession_df)
     
+    # Location vs. User Input
+    st.write('\n')
+    st.subheader(f'Location vs. {quantitative}')
+    location_cond = df_selection['location'].isin(location)
+    location_df = df_selection[location_cond]
+    location_df = round(location_df.groupby('location')[quantitative.lower()].mean(), 2)
     
+    st.bar_chart(data = location_df)
+    
+    # Gender vs. User Input
+    st.write('\n')
+    st.subheader(f'Gender vs. {quantitative}')
+    gender_cond = df_selection['gender'].isin(gender)
+    gender_df = df_selection[gender_cond]
+    gender_df = round(gender_df.groupby('location')[quantitative.lower()].mean(), 2)
+    
+    st.bar_chart(data = gender_df)
+    
+    # Interests vs. User Input
+    st.write('\n')
+    st.subheader(f'Interests vs. {quantitative}')
+    interest_cond = df_selection['interests'].isin(interests)
+    interest_df = df_selection[interest_cond]
+    interest_df = round(interest_df.groupby('interests')[quantitative.lower()].mean(), 2)
+    
+    st.bar_chart(data = interest_df)
+    
+    # Demographics vs. User Input
+    st.write('\n')
+    st.subheader(f'Demographics vs. {quantitative}')
+    demographics_cond = df_selection['demographics'].isin(demographics)
+    demographics_df = df_selection[demographics_cond]
+    demographics_df = round(demographics_df.groupby('location')[quantitative.lower()].mean(), 2)
+    
+    st.bar_chart(data = demographics_df)
