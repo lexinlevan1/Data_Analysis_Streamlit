@@ -8,7 +8,7 @@ import seaborn as sns
 
 st.set_page_config(page_title= 'Average Time Spent By A User On Social Media',
                    page_icon= ':bar_chart:',
-                   layout = 'centered')
+                   layout = 'wide')
 
 df = pd.read_csv('dummy_data.csv')
 
@@ -27,6 +27,7 @@ tab1, tab2 = st.tabs(['EDA', 'Visualization'])
 
 # -------- Exploratory Data Analysis --------
 with tab1:
+    
     st.header('Exploratory Data Analysis')
     
     # ------ Sidebar Creation -------
@@ -82,7 +83,7 @@ with tab1:
 with tab2: 
 
     # ------ Main Page -------
-    st.title(':bar_chart: Time Spent Correlations')
+    st.title(':bar_chart: Visualizations')
     st.markdown('###')
     
     profession_str = ', '.join(profession)
@@ -118,7 +119,7 @@ with tab2:
     quantitative = st.sidebar.selectbox(
         'What Quantitative Variable do you want to compare each category with?',
         ('Age', 'Time_spent', 'Income'),
-        index = 0,
+        index = 1,
         placeholder = 'Select Numerical Variable...'
     )
     
@@ -178,3 +179,6 @@ with tab2:
         demographics_df = round(demographics_df.groupby('demographics')[quantitative.lower()].mean(), 2)
         
         st.bar_chart(data = demographics_df)
+        
+        
+    
