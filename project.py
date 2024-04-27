@@ -106,10 +106,10 @@ with tab2:
 
     left_col, middle_col, right_col = st.columns(3)
     with left_col: 
-        st.subheader(':dollar: Income Average:')
+        st.subheader(':dollar: Income Average')
         st.subheader(f'$ {average_income}')
     with middle_col: 
-        st.subheader(':clock2: Average Time')
+        st.subheader(':clock2: Average Time Spent')
         st.subheader(f'{average_time_spent} hours')
     with right_col: 
         st.subheader(':house: Homeowners')
@@ -123,6 +123,7 @@ with tab2:
         placeholder = 'Select Numerical Variable...'
     )
     
+    st.header(':pushpin: Interactive Charts')
     col1, col2, col3 = st.columns(3)
     
     with col1: 
